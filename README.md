@@ -1,14 +1,15 @@
 cron-editor
 ===
 
-A library that helps the user graphically build a CRON expression using Angular 2+. It is a fork of the  vincentjames501's [angular-cron-gen](https://github.com/vincentjames501/angular-cron-gen) for AngularJS 1.5+.
+A library that helps the user graphically build a CRON expression using Angular 2+. It is a fork of the  vincentjames501's [angular-cron-gen](https://github.com/vincentjames501/angular-cron-gen) for AngularJS 1.5+ and claudiuconstantin's [cron-editor(https://github.com/claudiuconstantin/cron-editor)]. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.2.0. To run the sample app just run `npm run start` and go to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+**The main additions of this fork are support for standard Linux cron expressions (with reduced functionallity given the restrictions of the original format). Also the component was upgraded to support Bootstrap 4+ and Angular 5+.**
 
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.1. To run the sample app just run `npm run start` and go to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Demo
 
-A work-in-progress demo can be found [here](https://claudiuconstantin.github.io/cron-editor/)
+A work-in-progress demo can be found [here](https://esarmientoe.github.io/cron-editor/)
 
 ## Usage
 
@@ -57,7 +58,7 @@ export class MyComponent {
        formRadioClass: 'cron-editor-radio',
        formCheckboxClass: 'cron-editor-checkbox',
        
-       defaultTime: "10:00:00",
+       defaultTime: "00:00:00",
 
        hideMinutesTab: false,
        hideHourlyTab: false,
@@ -66,13 +67,13 @@ export class MyComponent {
        hideMonthlyTab: false,
        hideYearlyTab: false,
        hideAdvancedTab: true,
-       hideSpecificWeekDayTab : true,
-       hideSpecificMonthWeekTab : true,
+       hideSpecificWeekDayTab : false,
+       hideSpecificMonthWeekTab : false,
 
        use24HourTime: true,
        hideSeconds: false,
 
-       cronFlavor: "standard" //standard or quartz
+       cronFlavor: "quartz" //standard or quartz
     };
 }
 ```
