@@ -59,8 +59,8 @@
                   {{minute}}
                 </option>
               </select> minute(s)
-              <span *ngIf="!options.hideSeconds">on second</span>
-              <select class="seconds" *ngIf="!options.hideSeconds" [disabled]="disabled || activeTab !== 'minutes'" (change)="regenerateCron($event)"
+              <span *ngIf="!options.hideSeconds && isCronFlavorQuartz">on second</span>
+              <select class="seconds" *ngIf="!options.hideSeconds && isCronFlavorQuartz" [disabled]="disabled || activeTab !== 'minutes'" (change)="regenerateCron($event)"
                 [(ngModel)]="state.minutes.seconds" [ngClass]="options.formSelectClass">
                 <option *ngFor="let second of selectOptions.seconds" [ngValue]="second">
                   {{second}}
@@ -85,8 +85,8 @@
                   {{minute}}
                 </option>
               </select>
-              <span *ngIf="!options.hideSeconds">and second</span>
-              <select class="seconds" *ngIf="!options.hideSeconds" [disabled]="disabled || activeTab !== 'hourly'" (change)="regenerateCron($event)"
+              <span *ngIf="!options.hideSeconds && isCronFlavorQuartz">and second</span>
+              <select class="seconds" *ngIf="!options.hideSeconds && isCronFlavorQuartz" [disabled]="disabled || activeTab !== 'hourly'" (change)="regenerateCron($event)"
                 [(ngModel)]="state.hourly.seconds" [ngClass]="options.formSelectClass">
                 <option *ngFor="let second of selectOptions.seconds" [ngValue]="second">
                   {{second}}
@@ -110,7 +110,7 @@
 
               <cron-time-picker [disabled]="disabled || activeTab !== 'daily' || state.daily.subTab !== 'everyDays'" (onChange)="regenerateCron($event)"
                 [(model)]="state.daily.everyDays" [selectClass]="options.formSelectClass" [use24HourTime]="options.use24HourTime"
-                [hideSeconds]="options.hideSeconds">
+                [hideSeconds]="options.hideSeconds|| !isCronFlavorQuartz">
               </cron-time-picker>
             </div>
 
@@ -119,7 +119,7 @@
                 [ngClass]="state.formRadioClass"> Every working day at
               <cron-time-picker [disabled]="disabled || activeTab !== 'daily' || state.daily.subTab !== 'everyWeekDay'" (change)="regenerateCron($event)"
                 [(model)]="state.daily.everyWeekDay" [selectClass]="options.formSelectClass" [use24HourTime]="options.use24HourTime"
-                [hideSeconds]="options.hideSeconds">
+                [hideSeconds]="options.hideSeconds || !isCronFlavorQuartz">
               </cron-time-picker>
             </div>
           </div>
@@ -161,7 +161,7 @@
                 <div class="col-sm-6">
                   at
                   <cron-time-picker [disabled]="disabled || activeTab !== 'weekly'" (change)="regenerateCron($event)" [(model)]="state.weekly"
-                    [selectClass]="options.formSelectClass" [use24HourTime]="options.use24HourTime" [hideSeconds]="options.hideSeconds">
+                    [selectClass]="options.formSelectClass" [use24HourTime]="options.use24HourTime" [hideSeconds]="options.hideSeconds|| !isCronFlavorQuartz">
                   </cron-time-picker>
                 </div>
               </div>
@@ -173,11 +173,17 @@
           <div class="tab-pane" *ngIf="!options.hideMonthlyTab" [ngClass]="{'active': activeTab === 'monthly'}">
             <div class="well well-small">
               <input type="radio" name="monthly-radio" value="specificDay" [disabled]="disabled" (change)="regenerateCron($event)" [(ngModel)]="state.monthly.subTab"
-                [ngClass]="state.formRadioClass"> On the
-              <select class="month-days" [disabled]="disabled || activeTab !== 'monthly' || state.monthly.subTab !== 'specificDay'" (change)="regenerateCron($event)"
+                [ngClass]="state.formRadioClass"> On the              
+              <select *ngIf="options.cronFlavor == 'quartz'" class="month-days" [disabled]="disabled || activeTab !== 'monthly' || state.monthly.subTab !== 'specificDay'" (change)="regenerateCron($event)"
                 [(ngModel)]="state.monthly.specificDay.day" [ngClass]="options.formSelectClass">
                 <option *ngFor="let monthDaysWithLast of selectOptions.monthDaysWithLasts" [ngValue]="monthDaysWithLast">
                   {{monthDayDisplay(monthDaysWithLast)}}
+                </option>
+              </select>
+              <select *ngIf="options.cronFlavor == 'standard'" class="month-days" [disabled]="disabled || activeTab !== 'monthly' || state.monthly.subTab !== 'specificDay'" (change)="regenerateCron($event)"
+              [(ngModel)]="state.monthly.specificDay.day" [ngClass]="options.formSelectClass">
+                <option *ngFor="let monthDaysWithOutLast of selectOptions.monthDaysWithOutLasts" [ngValue]="monthDaysWithOutLast">
+                  {{monthDayDisplay(monthDaysWithOutLast)}}
                 </option>
               </select> of every
               <select class="months-small" [disabled]="disabled || activeTab !== 'monthly' || state.monthly.subTab !== 'specificDay'" (change)="regenerateCron($event)"
@@ -188,10 +194,10 @@
               </select> month(s) at
               <cron-time-picker [disabled]="disabled || activeTab !== 'monthly' || state.monthly.subTab !== 'specificDay'" (change)="regenerateCron($event)"
                 [(model)]="state.monthly.specificDay" [selectClass]="options.formSelectClass" [use24HourTime]="options.use24HourTime"
-                [hideSeconds]="options.hideSeconds">
+                [hideSeconds]="options.hideSeconds || !isCronFlavorQuartz">
               </cron-time-picker>
             </div>
-            <div class="well well-small">
+            <div class="well well-small" *ngIf="!options.hideSpecificWeekDayTab">
               <input type="radio" name="monthly-radio" value="specificWeekDay" [disabled]="disabled" (change)="regenerateCron($event)"
                 [(ngModel)]="state.monthly.subTab" [ngClass]="state.formRadioClass"> On the
               <select class="day-order-in-month" [disabled]="disabled || activeTab !== 'monthly' || state.monthly.subTab !== 'specificWeekDay'"
@@ -214,7 +220,7 @@
               </select> month(s) at
               <cron-time-picker [disabled]="disabled || activeTab !== 'monthly' || state.monthly.subTab !== 'specificWeekDay'" (change)="regenerateCron($event)"
                 [(model)]="state.monthly.specificWeekDay" [selectClass]="options.formSelectClass" [use24HourTime]="options.use24HourTime"
-                [hideSeconds]="options.hideSeconds">
+                [hideSeconds]="options.hideSeconds || !isCronFlavorQuartz">
               </cron-time-picker>
             </div>
           </div>
@@ -230,18 +236,24 @@
                   {{monthDisplay(month)}}
                 </option>
               </select> on the
-              <select class="month-days" [disabled]="disabled || activeTab !== 'yearly' || state.yearly.subTab !== 'specificMonthDay'"
+              <select *ngIf="options.cronFlavor == 'quartz'" class="month-days" [disabled]="disabled || activeTab !== 'yearly' || state.yearly.subTab !== 'specificMonthDay'"
                 (change)="regenerateCron($event)" [(ngModel)]="state.yearly.specificMonthDay.day" [ngClass]="options.formSelectClass">
                 <option *ngFor="let monthDaysWithLast of selectOptions.monthDaysWithLasts" [ngValue]="monthDaysWithLast">
                   {{monthDayDisplay(monthDaysWithLast)}}
                 </option>
-              </select> at
+              </select>
+              <select *ngIf="options.cronFlavor == 'standard'" class="month-days" [disabled]="disabled || activeTab !== 'yearly' || state.yearly.subTab !== 'specificMonthDay'"
+              (change)="regenerateCron($event)" [(ngModel)]="state.yearly.specificMonthDay.day" [ngClass]="options.formSelectClass">
+              <option *ngFor="let monthDaysWithOutLast of selectOptions.monthDaysWithOutLasts" [ngValue]="monthDaysWithOutLast">
+                {{monthDayDisplay(monthDaysWithOutLast)}}
+              </option>
+            </select> at
               <cron-time-picker [disabled]="disabled || activeTab !== 'yearly' || state.yearly.subTab !== 'specificMonthDay'" (change)="regenerateCron($event)"
                 [(model)]="state.yearly.specificMonthDay" [selectClass]="options.formSelectClass" [use24HourTime]="options.use24HourTime"
-                [hideSeconds]="options.hideSeconds">
+                [hideSeconds]="options.hideSeconds || !isCronFlavorQuartz">
               </cron-time-picker>
             </div>
-            <div class="well well-small">
+            <div class="well well-small" *ngIf="!options.hideSpecificMonthWeekTab">
               <input type="radio" name="yearly-radio" value="specificMonthWeek" [disabled]="disabled" (change)="regenerateCron($event)"
                 [(ngModel)]="state.yearly.subTab" [ngClass]="state.formRadioClass"> On the
               <select class="day-order-in-month" [disabled]="disabled || activeTab !== 'yearly' || state.yearly.subTab !== 'specificMonthWeek'"
@@ -264,7 +276,7 @@
               </select> at
               <cron-time-picker [disabled]="disabled || activeTab !== 'yearly' || state.yearly.subTab !== 'specificMonthWeek'" (change)="regenerateCron($event)"
                 [(model)]="state.yearly.specificMonthWeek" [selectClass]="options.formSelectClass" [use24HourTime]="options.use24HourTime"
-                [hideSeconds]="options.hideSeconds">
+                [hideSeconds]="options.hideSeconds || !isCronFlavorQuartz">
               </cron-time-picker>
             </div>
           </div>

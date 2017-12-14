@@ -66,8 +66,13 @@ export class MyComponent {
        hideMonthlyTab: false,
        hideYearlyTab: false,
        hideAdvancedTab: true,
+       hideSpecificWeekDayTab : true,
+       hideSpecificMonthWeekTab : true,
+
        use24HourTime: true,
-       hideSeconds: false
+       hideSeconds: false,
+
+       cronFlavor: "standard" //standard or quartz
     };
 }
 ```

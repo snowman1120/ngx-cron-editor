@@ -1,7 +1,10 @@
 {
-  "name": "cron-editor",
+  "name": "@tss/cron-editor",
   "description": "A cron expression generator for Angular 2+",
   "author": "Claudiu Constantin",
+  "contributors": [
+    "Eduardo Sarmiento"
+  ],
   "version": "0.1.6",
   "license": "MIT",
   "repository": {

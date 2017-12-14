@@ -28,8 +28,15 @@ export class CronGenComponent implements OnInit, OnChanges {
     private localCron: string;
     private isDirty: boolean;
 
+    get isCronFlavorQuartz(){return this.options.cronFlavor === 'quartz';}
+    get isCronFlavorStandard(){return this.options.cronFlavor === 'standard';}
+
+    get yearDefaultChar(){return this.options.cronFlavor === 'quartz' ? "*" : "";}
+    get weekDayDefaultChar(){return this.options.cronFlavor === 'quartz' ? "?" : "*";}
+    get monthDayDefaultChar(){return this.options.cronFlavor === 'quartz' ? "?" : "*";}
+
     public async ngOnInit() {
-        this.state = this.getDefaultState();
+        this.state = this.getDefaultState(); 
 
         this.handleModelChange(this.cron);
     }
@@ -77,18 +84,18 @@ export class CronGenComponent implements OnInit, OnChanges {
 
         switch (this.activeTab) {
             case "minutes":
-                this.cron = `${this.state.minutes.seconds} 0/${this.state.minutes.minutes} * 1/1 * ? *`;
+                this.cron = `${this.isCronFlavorQuartz ? this.state.minutes.seconds : ''} 0/${this.state.minutes.minutes} * 1/1 * ${this.weekDayDefaultChar} ${this.yearDefaultChar}`.trim();
                 break;
             case "hourly":
-                this.cron = `${this.state.hourly.seconds} ${this.state.hourly.minutes} 0/${this.state.hourly.hours} 1/1 * ? *`;
+                this.cron = `${this.isCronFlavorQuartz ? this.state.hourly.seconds : ''} ${this.state.hourly.minutes} 0/${this.state.hourly.hours} 1/1 * ${this.weekDayDefaultChar} ${this.yearDefaultChar}`.trim();
                 break;
             case "daily":
                 switch (this.state.daily.subTab) {
                     case "everyDays":
-                        this.cron = `${this.state.daily.everyDays.seconds} ${this.state.daily.everyDays.minutes} ${this.hourToCron(this.state.daily.everyDays.hours, this.state.daily.everyDays.hourType)} 1/${this.state.daily.everyDays.days} * ? *`;
+                        this.cron = `${this.isCronFlavorQuartz ? this.state.daily.everyDays.seconds : ''} ${this.state.daily.everyDays.minutes} ${this.hourToCron(this.state.daily.everyDays.hours, this.state.daily.everyDays.hourType)} 1/${this.state.daily.everyDays.days} * ${this.weekDayDefaultChar} ${this.yearDefaultChar}`.trim();
                         break;
                     case "everyWeekDay":
-                        this.cron = `${this.state.daily.everyWeekDay.seconds} ${this.state.daily.everyWeekDay.minutes} ${this.hourToCron(this.state.daily.everyWeekDay.hours, this.state.daily.everyWeekDay.hourType)} ? * MON-FRI *`;
+                        this.cron = `${this.isCronFlavorQuartz ? this.state.daily.everyWeekDay.seconds : ''} ${this.state.daily.everyWeekDay.minutes} ${this.hourToCron(this.state.daily.everyWeekDay.hours, this.state.daily.everyWeekDay.hourType)} ${this.monthDayDefaultChar} * MON-FRI ${this.yearDefaultChar}`.trim();
                         break;
                     default:
                         throw "Invalid cron daily subtab selection";
@@ -98,15 +105,15 @@ export class CronGenComponent implements OnInit, OnChanges {
                 const days = this.selectOptions.days
                     .reduce((acc, day) => this.state.weekly[day] ? acc.concat([day]) : acc, [])
                     .join(",");
-                this.cron = `${this.state.weekly.seconds} ${this.state.weekly.minutes} ${this.hourToCron(this.state.weekly.hours, this.state.weekly.hourType)} ? * ${days} *`;
+                this.cron = `${this.isCronFlavorQuartz ? this.state.weekly.seconds : ''} ${this.state.weekly.minutes} ${this.hourToCron(this.state.weekly.hours, this.state.weekly.hourType)} ${this.monthDayDefaultChar} * ${days} ${this.yearDefaultChar}`.trim();
                 break;
             case "monthly":
                 switch (this.state.monthly.subTab) {
                     case "specificDay":
-                        this.cron = `${this.state.monthly.specificDay.seconds} ${this.state.monthly.specificDay.minutes} ${this.hourToCron(this.state.monthly.specificDay.hours, this.state.monthly.specificDay.hourType)} ${this.state.monthly.specificDay.day} 1/${this.state.monthly.specificDay.months} ? *`;
+                        this.cron = `${this.isCronFlavorQuartz ? this.state.monthly.specificDay.seconds : ''} ${this.state.monthly.specificDay.minutes} ${this.hourToCron(this.state.monthly.specificDay.hours, this.state.monthly.specificDay.hourType)} ${this.state.monthly.specificDay.day} 1/${this.state.monthly.specificDay.months} ${this.weekDayDefaultChar} ${this.yearDefaultChar}`.trim();
                         break;
                     case "specificWeekDay":
-                        this.cron = `${this.state.monthly.specificWeekDay.seconds} ${this.state.monthly.specificWeekDay.minutes} ${this.hourToCron(this.state.monthly.specificWeekDay.hours, this.state.monthly.specificWeekDay.hourType)} ? 1/${this.state.monthly.specificWeekDay.months} ${this.state.monthly.specificWeekDay.day}${this.state.monthly.specificWeekDay.monthWeek} *`;
+                        this.cron = `${this.isCronFlavorQuartz ? this.state.monthly.specificWeekDay.seconds : ''} ${this.state.monthly.specificWeekDay.minutes} ${this.hourToCron(this.state.monthly.specificWeekDay.hours, this.state.monthly.specificWeekDay.hourType)} ${this.monthDayDefaultChar} 1/${this.state.monthly.specificWeekDay.months} ${this.state.monthly.specificWeekDay.day}${this.state.monthly.specificWeekDay.monthWeek} ${this.yearDefaultChar}`.trim();
                         break;
                     default:
                         throw "Invalid cron monthly subtab selection";
@@ -115,10 +122,10 @@ export class CronGenComponent implements OnInit, OnChanges {
             case "yearly":
                 switch (this.state.yearly.subTab) {
                     case "specificMonthDay":
-                        this.cron = `${this.state.yearly.specificMonthDay.seconds} ${this.state.yearly.specificMonthDay.minutes} ${this.hourToCron(this.state.yearly.specificMonthDay.hours, this.state.yearly.specificMonthDay.hourType)} ${this.state.yearly.specificMonthDay.day} ${this.state.yearly.specificMonthDay.month} ? *`;
+                        this.cron = `${this.isCronFlavorQuartz ? this.state.yearly.specificMonthDay.seconds : ''} ${this.state.yearly.specificMonthDay.minutes} ${this.hourToCron(this.state.yearly.specificMonthDay.hours, this.state.yearly.specificMonthDay.hourType)} ${this.state.yearly.specificMonthDay.day} ${this.state.yearly.specificMonthDay.month} ${this.weekDayDefaultChar} ${this.yearDefaultChar}`.trim();
                         break;
                     case "specificMonthWeek":
-                        this.cron = `${this.state.yearly.specificMonthWeek.seconds} ${this.state.yearly.specificMonthWeek.minutes} ${this.hourToCron(this.state.yearly.specificMonthWeek.hours, this.state.yearly.specificMonthWeek.hourType)} ? ${this.state.yearly.specificMonthWeek.month} ${this.state.yearly.specificMonthWeek.day}${this.state.yearly.specificMonthWeek.monthWeek} *`;
+                        this.cron = `${this.isCronFlavorQuartz ? this.state.yearly.specificMonthWeek.seconds : ''} ${this.state.yearly.specificMonthWeek.minutes} ${this.hourToCron(this.state.yearly.specificMonthWeek.hours, this.state.yearly.specificMonthWeek.hourType)} ${this.monthDayDefaultChar} ${this.state.yearly.specificMonthWeek.month} ${this.state.yearly.specificMonthWeek.day}${this.state.yearly.specificMonthWeek.monthWeek} ${this.yearDefaultChar}`.trim();
                         break;
                     default:
                         throw "Invalid cron yearly subtab selection";
@@ -157,23 +164,31 @@ export class CronGenComponent implements OnInit, OnChanges {
         }
 
         if (!this.cronIsValid(cron)) {
-            throw "Invalid cron expression, there must be 6 or 7 segments";
+            if (this.isCronFlavorQuartz)
+                throw "Invalid cron expression, there must be 6 or 7 segments";
+
+            if (this.isCronFlavorStandard)
+                throw "Invalid cron expression, there must be 5 segments";
         }
+
+        var origCron : string = cron;
+        if (cron.split(" ").length === 5 && this.isCronFlavorStandard)
+            cron = `0 ${cron} *`;
 
         const [seconds, minutes, hours, dayOfMonth, month, dayOfWeek] = cron.split(" ");
 
-        if (cron.match(/\d+ 0\/\d+ \* 1\/1 \* \? \*/)) {
+        if (cron.match(/\d+ 0\/\d+ \* 1\/1 \* [\?\*] \*/)) {
             this.activeTab = "minutes";
 
             this.state.minutes.minutes = parseInt(minutes.substring(2));
             this.state.minutes.seconds = parseInt(seconds);
-        } else if (cron.match(/\d+ \d+ 0\/\d+ 1\/1 \* \? \*/)) {
+        } else if (cron.match(/\d+ \d+ 0\/\d+ 1\/1 \* [\?\*] \*/)) {
             this.activeTab = "hourly";
 
             this.state.hourly.hours = parseInt(hours.substring(2));
             this.state.hourly.minutes = parseInt(minutes);
             this.state.hourly.seconds = parseInt(seconds);
-        } else if (cron.match(/\d+ \d+ \d+ 1\/\d+ \* \? \*/)) {
+        } else if (cron.match(/\d+ \d+ \d+ 1\/\d+ \* [\?\*] \*/)) {
             this.activeTab = "daily";
 
             this.state.daily.subTab = "everyDays";
@@ -183,7 +198,7 @@ export class CronGenComponent implements OnInit, OnChanges {
             this.state.daily.everyDays.hourType = this.getHourType(parsedHours);
             this.state.daily.everyDays.minutes = parseInt(minutes);
             this.state.daily.everyDays.seconds = parseInt(seconds);
-        } else if (cron.match(/\d+ \d+ \d+ \? \* MON-FRI \*/)) {
+        } else if (cron.match(/\d+ \d+ \d+ [\?\*] \* MON-FRI \*/)) {
             this.activeTab = "daily";
 
             this.state.daily.subTab = "everyWeekDay";
@@ -192,7 +207,7 @@ export class CronGenComponent implements OnInit, OnChanges {
             this.state.daily.everyWeekDay.hourType = this.getHourType(parsedHours);
             this.state.daily.everyWeekDay.minutes = parseInt(minutes);
             this.state.daily.everyWeekDay.seconds = parseInt(seconds);
-        } else if (cron.match(/\d+ \d+ \d+ \? \* (MON|TUE|WED|THU|FRI|SAT|SUN)(,(MON|TUE|WED|THU|FRI|SAT|SUN))* \*/)) {
+        } else if (cron.match(/\d+ \d+ \d+ [\?\*] \* (MON|TUE|WED|THU|FRI|SAT|SUN)(,(MON|TUE|WED|THU|FRI|SAT|SUN))* \*/)) {
             this.activeTab = "weekly";
             this.selectOptions.days.forEach(weekDay => this.state.weekly[weekDay] = false);
             dayOfWeek.split(",").forEach(weekDay => this.state.weekly[weekDay] = true);
@@ -201,7 +216,7 @@ export class CronGenComponent implements OnInit, OnChanges {
             this.state.weekly.hourType = this.getHourType(parsedHours);
             this.state.weekly.minutes = parseInt(minutes);
             this.state.weekly.seconds = parseInt(seconds);
-        } else if (cron.match(/\d+ \d+ \d+ (\d+|L|LW|1W) 1\/\d+ \? \*/)) {
+        } else if (cron.match(/\d+ \d+ \d+ (\d+|L|LW|1W) 1\/\d+ [\?\*] \*/)) {
             this.activeTab = "monthly";
             this.state.monthly.subTab = "specificDay";
             this.state.monthly.specificDay.day = dayOfMonth;
@@ -211,7 +226,7 @@ export class CronGenComponent implements OnInit, OnChanges {
             this.state.monthly.specificDay.hourType = this.getHourType(parsedHours);
             this.state.monthly.specificDay.minutes = parseInt(minutes);
             this.state.monthly.specificDay.seconds = parseInt(seconds);
-        } else if (cron.match(/\d+ \d+ \d+ \? 1\/\d+ (MON|TUE|WED|THU|FRI|SAT|SUN)((#[1-5])|L) \*/)) {
+        } else if (cron.match(/\d+ \d+ \d+ [\?\*] 1\/\d+ (MON|TUE|WED|THU|FRI|SAT|SUN)((#[1-5])|L) \*/)) {
             const day = dayOfWeek.substr(0, 3);
             const monthWeek = dayOfWeek.substr(3);
             this.activeTab = "monthly";
@@ -224,7 +239,7 @@ export class CronGenComponent implements OnInit, OnChanges {
             this.state.monthly.specificWeekDay.hourType = this.getHourType(parsedHours);
             this.state.monthly.specificWeekDay.minutes = parseInt(minutes);
             this.state.monthly.specificWeekDay.seconds = parseInt(seconds);
-        } else if (cron.match(/\d+ \d+ \d+ (\d+|L|LW|1W) \d+ \? \*/)) {
+        } else if (cron.match(/\d+ \d+ \d+ (\d+|L|LW|1W) \d+ [\?\*] \*/)) {
             this.activeTab = "yearly";
             this.state.yearly.subTab = "specificMonthDay";
             this.state.yearly.specificMonthDay.month = parseInt(month);
@@ -234,7 +249,7 @@ export class CronGenComponent implements OnInit, OnChanges {
             this.state.yearly.specificMonthDay.hourType = this.getHourType(parsedHours);
             this.state.yearly.specificMonthDay.minutes = parseInt(minutes);
             this.state.yearly.specificMonthDay.seconds = parseInt(seconds);
-        } else if (cron.match(/\d+ \d+ \d+ \? \d+ (MON|TUE|WED|THU|FRI|SAT|SUN)((#[1-5])|L) \*/)) {
+        } else if (cron.match(/\d+ \d+ \d+ [\?\*] \d+ (MON|TUE|WED|THU|FRI|SAT|SUN)((#[1-5])|L) \*/)) {
             const day = dayOfWeek.substr(0, 3);
             const monthWeek = dayOfWeek.substr(3);
             this.activeTab = "yearly";
@@ -249,7 +264,7 @@ export class CronGenComponent implements OnInit, OnChanges {
             this.state.yearly.specificMonthWeek.seconds = parseInt(seconds);
         } else {
             this.activeTab = "advanced";
-            this.state.advanced.expression = cron;
+            this.state.advanced.expression = origCron;
         }
     }
 
@@ -257,7 +272,7 @@ export class CronGenComponent implements OnInit, OnChanges {
         if (cron) {
             const cronParts = cron.split(" ");
 
-            return cronParts.length === 6 || cronParts.length === 7;
+            return (this.isCronFlavorQuartz && (cronParts.length === 6 || cronParts.length === 7) || (this.isCronFlavorStandard && cronParts.length === 5));
         }
 
         return false;
@@ -346,7 +361,7 @@ export class CronGenComponent implements OnInit, OnChanges {
                 }
             },
             advanced: {
-                expression: "0 15 10 L-2 * ?"
+                expression: this.isCronFlavorQuartz ? "0 15 10 L-2 * ? *" : "15 10 2 * *"
             }
         };
     }
@@ -383,6 +398,7 @@ export class CronGenComponent implements OnInit, OnChanges {
             hours: this.getRange(1, 23),
             monthDays: this.getRange(1, 31),
             monthDaysWithLasts: ["1W", ...[...this.getRange(1, 31).map(String)], "LW", "L"],
+            monthDaysWithOutLasts: [...[...this.getRange(1, 31).map(String)]],
             hourTypes: ["AM", "PM"]
         };
     }
