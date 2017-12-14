@@ -1,20 +1,20 @@
 {
-  "name": "@tss/cron-editor",
+  "name": "cron-editor",
   "description": "A cron expression generator for Angular 2+",
   "author": "Claudiu Constantin",
   "contributors": [
     "Eduardo Sarmiento"
   ],
-  "version": "0.1.6",
+  "version": "0.2.0",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/claudiuconstantin/cron-editor"
+    "url": "git://github.com/esarmientoe/cron-editor"
   },
   "bugs": {
-    "url": "https://github.com/claudiuconstantin/cron-editor/issues"
+    "url": "https://github.com/esarmientoe/cron-editor/issues"
   },
-  "homepage": "https://github.com/claudiuconstantin/cron-editor",
+  "homepage": "https://github.com/esarmientoe/cron-editor",
   "keywords": [
     "angular",
     "cron",
