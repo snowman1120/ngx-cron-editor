@@ -8,7 +8,7 @@ import { CronGenComponent } from "./cron-editor/cron-editor.component"
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public cronExpression = '15 10 2 * *';
+  public cronExpression = '0 0 1/1 * *';
   public isCronDisabled = false;
   public cronOptions: CronOptions = {
     formInputClass: 'form-control cron-editor-input',
@@ -25,8 +25,8 @@ export class AppComponent {
     hideMonthlyTab: false,
     hideYearlyTab: false,
     hideAdvancedTab: false,
-    hideSpecificWeekDayTab : true,
-    hideSpecificMonthWeekTab : true,
+    hideSpecificWeekDayTab : false,
+    hideSpecificMonthWeekTab : false,
 
     use24HourTime: true,
     hideSeconds: false,
@@ -34,11 +34,11 @@ export class AppComponent {
     cronFlavor: "standard"
   };
 
-  @ViewChild("croneditor1")
-  croneditor1 : CronGenComponent;
+  @ViewChild("cronEditorDemo")
+  cronEditorDemo : CronGenComponent;
 
   cronFlavorChange() {
-    this.croneditor1.options = this.cronOptions;
-    this.croneditor1.regenerateCron();
+    this.cronEditorDemo.options = this.cronOptions;
+    this.cronEditorDemo.regenerateCron();
   }
 }
