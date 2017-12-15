@@ -21,7 +21,7 @@ A work-in-progress demo can be found [here](https://esarmientoe.github.io/cron-e
 2. Import the module in your own module:
 
     ```ts
-    import { CronEditorModule } from "cron-editor/cron-editor";
+    import { CronEditorModule } from "cron-editor";
 
     @NgModule({
         imports: [..., CronEditorModule],
