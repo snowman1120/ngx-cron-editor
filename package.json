@@ -1,20 +1,21 @@
 {
-  "name": "cron-editor",
-  "description": "A cron expression generator for Angular 2+",
-  "author": "Claudiu Constantin",
+  "name": "ngx-cron-editor",
+  "description": "A cron expression generator for Angular 4+",
+  "author": "Håvard D. Johansen",
   "contributors": [
+    "Claudiu Constantin",
     "Eduardo Sarmiento"
   ],
   "version": "0.2.0",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git://github.com/esarmientoe/cron-editor"
+    "url": "git://github.com/haavardj/ngx-cron-editor"
   },
   "bugs": {
-    "url": "https://github.com/esarmientoe/cron-editor/issues"
+    "url": "https://github.com/haavardj/ngx-cron-editor/issues"
   },
-  "homepage": "https://github.com/esarmientoe/cron-editor",
+  "homepage": "https://github.com/haavardj/ngx-cron-editor",
   "keywords": [
     "angular",
     "cron",
@@ -31,23 +32,9 @@
     "e2e": "ng e2e",
     "copyhtml": "copy 'src/app/cron-editor/*.html' './components/cron-editor/'",
     "copycss": "copy 'src/app/cron-editor/*.css' './components/cron-editor/'",
-    "pack": "ng-packagr & cd dist & npm pack"
+    "pack": "ng-packagr -p package.json & cd dist & npm pack"
   },
-  "dependencies": {
-    "@angular/animations": "^5.1.1",
-    "@angular/common": "^5.1.1",
-    "@angular/compiler": "^5.1.1",
-    "@angular/core": "^5.1.1",
-    "@angular/forms": "^5.1.1",
-    "@angular/http": "^5.1.1",
-    "@angular/platform-browser": "^5.1.1",
-    "@angular/platform-browser-dynamic": "^5.1.1",
-    "@angular/router": "^5.1.1",
-    "bootstrap": "4.0.0-beta.2",
-    "core-js": "^2.5.1",
-    "rxjs": "^5.4.3",
-    "zone.js": "^0.8.17"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@angular/cli": "^1.4.3",
     "@angular/compiler-cli": "^5.1.1",
@@ -64,7 +51,7 @@
     "karma-coverage-istanbul-reporter": "^1.3.0",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "ng-packagr": "^1.6.0",
+    "ng-packagr": "^3.0.1",
     "protractor": "~5.2.2",
     "ts-node": "~4.0.1",
     "tslint": "~5.8.0",
@@ -72,7 +59,20 @@
   },
   "peerDependencies": {
     "jquery": "1.9.1 - 3",
-    "popper.js": "^1.12.3"
+    "popper.js": "^1.12.3",
+    "@angular/animations": "^5.1.1",
+    "@angular/common": "^5.1.1",
+    "@angular/compiler": "^5.1.1",
+    "@angular/core": "^5.1.1",
+    "@angular/forms": "^5.1.1",
+    "@angular/http": "^5.1.1",
+    "@angular/platform-browser": "^5.1.1",
+    "@angular/platform-browser-dynamic": "^5.1.1",
+    "@angular/router": "^5.1.1",
+    "bootstrap": "4.0.0-beta.2",
+    "core-js": "^2.5.1",
+    "rxjs": "^5.4.3",
+    "zone.js": "^0.8.17"
   },
   "ngPackage": {
     "lib": {
