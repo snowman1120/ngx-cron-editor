@@ -48,7 +48,7 @@ export class CronGenComponent implements OnInit, OnChanges {
         }
     }
 
-    public setActiveTab(tab: string) {
+    public setActiveTab(tab: string, event: any) {
         if (!this.disabled) {
             this.activeTab = tab;
             this.regenerateCron();
