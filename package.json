@@ -6,7 +6,7 @@
     "Claudiu Constantin",
     "Eduardo Sarmiento"
   ],
-  "version": "0.3.1",
+  "version": "0.4.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -34,8 +34,7 @@
     "copycss": "copy 'src/app/cron-editor/*.css' './components/cron-editor/'",
     "pack": "ng-packagr -p package.json & cd dist & npm pack"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@angular/animations": "^6.0.9",
     "@angular/common": "^6.0.9",
