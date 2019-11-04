@@ -1,4 +1,4 @@
-cron-editor
+ngx-cron-editor
 ===
 
 A library that helps the user graphically build a CRON expression using Angular 2+. It is a fork of the  vincentjames501's [angular-cron-gen](https://github.com/vincentjames501/angular-cron-gen) for AngularJS 1.5+ and claudiuconstantin's [cron-editor(https://github.com/claudiuconstantin/cron-editor)]. 
@@ -15,13 +15,13 @@ A work-in-progress demo can be found [here](https://esarmientoe.github.io/cron-e
 
 1. Install the npm package:
     ```
-    $ npm i cron-editor -S
+    $ npm i ngx-cron-editor -S
     ```
 
 2. Import the module in your own module:
 
     ```ts
-    import { CronEditorModule } from "cron-editor";
+    import { CronEditorModule } from "ngx-cron-editor";
 
     @NgModule({
         imports: [..., CronEditorModule],
