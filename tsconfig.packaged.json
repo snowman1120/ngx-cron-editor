@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "ngx-cron-editor": ["dist/libs/ngx-cron-editor"]
+    }
+  }
+}

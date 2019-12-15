@@ -1,0 +1,54 @@
+{
+  "$schema": "./node_modules/ng-packagr/package.schema.json",
+  "description": "A cron expression generator for Angular 8+",
+  "name": "ngx-cron-editor",
+  "version": "0.5.0",
+
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/haavardj/ngx-cron-editor"
+  },
+  "author": {
+    "name": "Håvard Dagenborg Johansen",
+    "email": "haavardj@dagenborg.net"
+  },
+  "contributors": [
+    "Claudiu Constantin",
+    "Eduardo Sarmiento"
+  ],
+  "keywords": [
+    "angular",
+    "cron",
+    "cron-expression",
+    "angular-cli",
+    "quartz"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/haavardj/ngx-cron-editor/issues"
+  },
+  "homepage": "https://github.com/haavardj/ngx-cron-editor",
+
+  "peerDependencies": {
+    "@angular/core": "~8.2.14",
+    "@angular/animations": "~8.2.14",
+    "@angular/common": "~8.2.14",
+    "@angular/compiler": "~8.2.14",
+    "@angular/forms": "~8.2.14",
+    "@angular/platform-browser": "~8.2.14",
+    "@angular/platform-browser-dynamic": "~8.2.14",
+    "@angular/router": "~8.2.14",
+    "bootstrap": "4.4.1",
+    "rxjs": "~6.5.3",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.9.1"
+  },
+
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public_api.ts"
+    },
+    "dest": "../../dist/libs/ngx-cron-editor"
+  }
+
+}
