@@ -1,0 +1,24 @@
+@import '~@angular/material/theming';
+
+.demo-container {
+  margin: 30px;
+}
+
+.demo-card {
+  @include  mat-elevation(2);
+  position: absolute;
+}
+
+.demo-card-content {
+}
+
+.demo-card-header {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  align-items: center;
+}
+
+.demo-card-footer {
+  margin: 0px;
+  padding: 16px;
+}

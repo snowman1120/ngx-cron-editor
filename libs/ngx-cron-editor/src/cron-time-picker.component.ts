@@ -1,32 +1,43 @@
-﻿import { Component, Input, Output, OnInit, EventEmitter } from "@angular/core";
+﻿import {Component, Input } from '@angular/core';
+import { ControlContainer } from '@angular/forms';
+
+
+export interface TimePickerModel {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
+function* range(start: number, end: number) {
+  for (let i = start; i <= end; i++) {
+    yield i;
+  }
+}
 
 @Component({
-    selector: "cron-time-picker",
-    templateUrl: "./cron-time-picker.template.html"  
+  selector: 'cron-time-picker',
+  templateUrl: './cron-time-picker.template.html',
+  providers: []
 })
-export class TimePickerComponent implements OnInit {
-    @Output() public onChange = new EventEmitter();
+export class TimePickerComponent {
 
-    @Input() public disabled: boolean;
-    @Input() public model: any;
-    @Input() public selectClass: string;
-    @Input() public use24HourTime: boolean;
-    @Input() public hideSeconds: boolean;
+  @Input() public disabled;
+  @Input() public use24HourTime = true;
+  @Input() public hideHours = false;
+  @Input() public hideMinutes = false;
+  @Input() public hideSeconds = true;
 
-    public hours: number[];
-    public minutes: number[];
-    public seconds: number[];
-    public hourTypes: string[];
+  get hours(): number[] {
+    return this.use24HourTime ? [... range(0, 23)] : [... range(0, 12)];
+  }
 
-    public async ngOnInit() {
-        this.hours = this.use24HourTime ? this.range(0, 23) : this.range(0, 12);
-        this.minutes = this.range(0, 59);
-        this.seconds = this.range(0, 59);
-        this.hourTypes = ["AM", "PM"];
-    }
+  public minutes =  [...range(0, 59) ];
+  public seconds = [...range(0, 59) ];
+  public hourTypes = ['AM', 'PM'];
 
-    private range(start: number, end: number): number[] {
-        const length = end - start + 1;
-        return Array.apply(undefined, Array(length)).map((_, i) => i + start);
-    }
+  constructor(public parent: ControlContainer) {}
+
 }
+
+

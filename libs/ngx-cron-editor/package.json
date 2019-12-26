@@ -38,7 +38,7 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
-    "bootstrap": "4.4.1",
+    "@angular/material": "^8.2.3",
     "rxjs": "~6.5.3",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
@@ -46,7 +46,8 @@
 
   "ngPackage": {
     "lib": {
-      "entryFile": "public_api.ts"
+      "entryFile": "public_api.ts",
+      "styleIncludePaths": ["./src"]
     },
     "dest": "../../dist/libs/ngx-cron-editor"
   }

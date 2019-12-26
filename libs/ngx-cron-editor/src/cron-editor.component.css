@@ -1,5 +1,16 @@
+
+
+.cron-editor-main {
+  @include mat-elevation(1);
+}
+
 .cron-editor-main .cron-editor-container {
-  margin-top: 10px;
+}
+
+.cron-editor-tab-content {
+  height: 200px;
+  margin-top: 24px;
+  border-radius: 8px;
 }
 
 .cron-editor-main .cron-editor-container .cron-editor-radio {
@@ -25,32 +36,27 @@
 .cron-editor-main .cron-editor-container .hours,
 .cron-editor-main .cron-editor-container .days,
 .cron-editor-main .cron-editor-container .seconds {
-  width: 70px;
+
 }
 
 .cron-editor-main .cron-editor-container .months {
-  width: 120px;
-}
+ }
 
 .cron-editor-main .cron-editor-container .month-days {
-  width: 130px;
+
 }
 
 .cron-editor-main .cron-editor-container .months-small {
-  width: 60px;
-}
+ }
 
 .cron-editor-main .cron-editor-container .day-order-in-month {
-  width: 95px;
-}
+ }
 
 .cron-editor-main .cron-editor-container .week-days {
-  width: 120px;
-}
+ }
 
 .cron-editor-main .cron-editor-container .advanced-cron-editor-input {
-  width: 200px;
-}
+ }
 
 .cron-editor-main .cron-editor-container .hour-types {
   width: 70px;
@@ -58,4 +64,18 @@
 
 .nav-tabs li a {
   cursor: pointer;
+}
+
+.cron-editor-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+}
+
+.cron-editor-radio-button {
+  margin: 5px;
+}
+
+.checkbox-margin {
+  margin: 0 10px;
 }

@@ -1,13 +1,14 @@
-import { Component, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { CronOptions } from 'ngx-cron-editor';
 import { CronGenComponent } from 'ngx-cron-editor';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public cronExpression = '0 0 1/1 * *';
   public isCronDisabled = false;
   public cronOptions: CronOptions = {
@@ -25,8 +26,8 @@ export class AppComponent {
     hideMonthlyTab: false,
     hideYearlyTab: false,
     hideAdvancedTab: false,
-    hideSpecificWeekDayTab : false,
-    hideSpecificMonthWeekTab : false,
+    hideSpecificWeekDayTab: false,
+    hideSpecificMonthWeekTab: false,
 
     use24HourTime: true,
     hideSeconds: false,
@@ -37,6 +38,9 @@ export class AppComponent {
   @ViewChild('cronEditorDemo', { static: false })
   cronEditorDemo: CronGenComponent;
 
+  constructor() {}
+
+  ngOnInit(): void {}
   cronFlavorChange() {
     this.cronEditorDemo.options = this.cronOptions;
     this.cronEditorDemo.regenerateCron();
