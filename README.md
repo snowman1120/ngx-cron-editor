@@ -1,13 +1,8 @@
 ngx-cron-editor
 ===
 
-A library for Angular 8 that helps the user graphically build a CRON expression. 
-It is a fork of the  vincentjames501's [angular-cron-gen](https://github.com/vincentjames501/angular-cron-gen) for AngularJS 1.5+ and claudiuconstantin's [cron-editor(https://github.com/claudiuconstantin/cron-editor)]. 
-
-**The main additions of this fork is support for Angular 8+.**
-
-We also plan to move from Bootstrap to Material Design components for Angular.
-
+An Angular 8 component for building cron expressions graphically.
+ 
 
 ## Demo
 
@@ -79,6 +74,13 @@ export class MyComponent {
     };
 }
 ```
+
+## History
+
+It is a fork of the  vincentjames501's [angular-cron-gen](https://github.com/vincentjames501/angular-cron-gen) for AngularJS 1.5+ and claudiuconstantin's [cron-editor(https://github.com/claudiuconstantin/cron-editor)]. 
+
+**The main additions of this fork is support for Angular 8+ and material design.**
+
 
 ## License:
 Licensed under the MIT license
