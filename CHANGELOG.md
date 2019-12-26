@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/haavardj/ngx-cron-editor/compare/v0.5.1...v0.6.0) (2019-12-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* Component now use Angular's reactive forms and material design styling.
+Support for template based forms is removed.
+
+### Features
+
+* Update for Angular 8 and Material design ([81c5bcb](https://github.com/haavardj/ngx-cron-editor/commit/81c5bcb))
+
 ### [0.5.1](https://github.com/haavardj/ngx-cron-editor/compare/v0.5.0...v0.5.1) (2019-12-15)
 
 
