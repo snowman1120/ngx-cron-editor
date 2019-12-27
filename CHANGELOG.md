@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.1](https://github.com/haavardj/ngx-cron-editor/compare/v0.6.0...v0.6.1) (2019-12-27)
+
+
+### Bug Fixes
+
+* app complains about BrowserModule import ([97772e8](https://github.com/haavardj/ngx-cron-editor/commit/97772e86a37ae3b91babeed74dcd7592da5b6ec8))
+
 ## [0.6.0](https://github.com/haavardj/ngx-cron-editor/compare/v0.5.1...v0.6.0) (2019-12-26)
 
 
