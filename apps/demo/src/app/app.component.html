@@ -25,15 +25,15 @@
       </mat-card-header>
 
       <mat-card-content class="demo-card-content">
-        <form [formGroup]="cronForm">
-        <cron-editor  #cronEditorDemo  formControlName="expression"  [options]="cronOptions">Cron here...</cron-editor>
+        <form >
+        <cron-editor  #cronEditorDemo [formControl]="cronForm"  [options]="cronOptions">Cron here...</cron-editor>
         </form>
       </mat-card-content>
 
       <mat-card-footer class="demo-card-footer">
         <div>
           <h3>
-            <b>Expression: {{cronForm.value.expression}}</b>
+            <b>Expression: {{cronForm.value}}</b>
           </h3>
         </div>
       </mat-card-footer>

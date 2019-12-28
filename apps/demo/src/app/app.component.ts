@@ -38,16 +38,14 @@ export class AppComponent implements OnInit {
   @ViewChild('cronEditorDemo', { static: false })
   cronEditorDemo: CronGenComponent;
 
-  cronForm: FormGroup;
+  cronForm: FormControl;
 
-  constructor(private fb: FormBuilder) {}
+  constructor() {}
 
   ngOnInit(): void {
-    this.cronForm = this.fb.group({
-      expression: [this.cronExpression]
-    });
-
+    this.cronForm = new FormControl(this.cronExpression);
   }
+
   cronFlavorChange() {
     this.cronEditorDemo.options = this.cronOptions;
   }
