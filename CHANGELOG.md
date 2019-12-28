@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.2](https://github.com/haavardj/ngx-cron-editor/compare/v0.6.1...v0.6.2) (2019-12-28)
+
+
+### Bug Fixes
+
+* add support for formControl directives ([887c9bc](https://github.com/haavardj/ngx-cron-editor/commit/887c9bcba2a8e6d898d981cfd1ab18ac144802c9))
+
 ### [0.6.1](https://github.com/haavardj/ngx-cron-editor/compare/v0.6.0...v0.6.1) (2019-12-27)
 
 
