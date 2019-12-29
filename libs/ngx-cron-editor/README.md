@@ -1,7 +1,8 @@
 ngx-cron-editor
 ===
 
-An Angular 8 component for building cron expressions graphically.
+An Angular 8 component for building cron expressions graphically. It is meant
+to be used in reactive forms and support Angular Material Design styling.
  
 
 ## Demo
@@ -18,7 +19,7 @@ A work-in-progress demo can be found [here](https://haavardj.github.io/ngx-cron-
 2. Import the module in your own module:
 
     ```ts
-    import { CronEditorModule } from "ngx-cron-editor";
+    import { CronEditorModule } from 'ngx-cron-editor';
 
     @NgModule({
         imports: [..., CronEditorModule],
@@ -28,32 +29,37 @@ A work-in-progress demo can be found [here](https://haavardj.github.io/ngx-cron-
     }
     ```
 
-3. Use the component in your html code:
+3. Setup the FormControl in you component's typescript file:
+   
+   ```ts
+   ngOnInit(): void {
+     this.cronForm = new FormControl('0 0 1/1 * *');
+   }
+   ```
+   
+4. Include the component in your html code:
 
     ```html
-    <cron-editor [(cron)]="cronExpression"></cron-editor>
+    <cron-editor [formControl]="cronForm"></cron-editor>
     ```
-
-4. That's it, you're done!
+   
+   or use the `formControlName='...'` directive if your form controller
+   lives in a FormGroup.
 
 ## Options
 
 ```html
-<cron-editor [(cron)]="cronExpression" [options]="cronOptions"></cron-editor>
+<cron-editor [formControl]="cronForm" [options]="cronOptions"></cron-editor>
 ```
 
 ```ts
-import { CronOptions } from "cron-editor/cron-editor";
+import { CronOptions } from 'ngx-cron-editor';
 
 @Component({
     ...
 })
 export class MyComponent {
    public cronOptions: CronOptions = {
-       formInputClass: 'form-control cron-editor-input',
-       formSelectClass: 'form-control cron-editor-select',
-       formRadioClass: 'cron-editor-radio',
-       formCheckboxClass: 'cron-editor-checkbox',
        
        defaultTime: "00:00:00",
 
@@ -77,7 +83,7 @@ export class MyComponent {
 
 ## History
 
-It is a fork of the  vincentjames501's [angular-cron-gen](https://github.com/vincentjames501/angular-cron-gen) for AngularJS 1.5+ and claudiuconstantin's [cron-editor(https://github.com/claudiuconstantin/cron-editor)]. 
+The ngx-cron-editor is a fork of the vincentjames501's [angular-cron-gen](https://github.com/vincentjames501/angular-cron-gen) for AngularJS 1.5+ and claudiuconstantin's [cron-editor(https://github.com/claudiuconstantin/cron-editor)]. 
 
 **The main additions of this fork is support for Angular 8+ and material design.**
 
