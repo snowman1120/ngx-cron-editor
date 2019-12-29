@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.3](https://github.com/haavardj/ngx-cron-editor/compare/v0.6.2...v0.6.3) (2019-12-29)
+
+
+### Bug Fixes
+
+* update README.md ([bbb5320](https://github.com/haavardj/ngx-cron-editor/commit/bbb53206ff59c6fdb13d2dfe8d5d03dd32e34779))
+
 ### [0.6.2](https://github.com/haavardj/ngx-cron-editor/compare/v0.6.1...v0.6.2) (2019-12-28)
 
 
