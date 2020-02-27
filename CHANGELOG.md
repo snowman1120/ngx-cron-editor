@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.4](https://github.com/haavardj/ngx-cron-editor/compare/v0.6.3...v0.6.4) (2020-02-27)
+
+
+### Bug Fixes
+
+* cron options hiding not working working ([#3](https://github.com/haavardj/ngx-cron-editor/issues/3)) ([52edbe6](https://github.com/haavardj/ngx-cron-editor/commit/52edbe6f86bf4ba0a547e7206718da88c9a6b636))
+
 ### [0.6.3](https://github.com/haavardj/ngx-cron-editor/compare/v0.6.2...v0.6.3) (2019-12-29)
 
 
